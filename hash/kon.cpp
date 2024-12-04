@@ -1,17 +1,20 @@
-#include <cryptopp/files.h>
-#include <cryptopp/hex.h>
-#include <cryptopp/sha.h>
-#include <fstream>
+#include <cryptopp/files.h> // для работы с файлами крипто 
+#include <cryptopp/hex.h> // для кодирование хэша
+#include <cryptopp/sha.h> // для использования SHA224 
+#include <fstream> 
 #include <iostream>
 #include <string>
 using namespace std;
-std::string sha224(string f)
+std::string sha224(string f) 
 {
-    using namespace CryptoPP;
-    SHA224 hash;
-    string new_hash;
-    FileSource file(f.c_str(), true, new HashFilter(hash, new HexEncoder(new StringSink(new_hash))));
-    return new_hash;
+    using namespace CryptoPP; // использование именого простарнаспа крипто++
+    SHA224 hash; // создается объект хэш класса SHA224 который будет вычислять хэш
+    string new_hash; // сюда будет записан результат 
+    FileSource file(f.c_str(), true, new HashFilter(hash, new HexEncoder(new StringSink(new_hash)))); // читает данный из файла 
+// HexFilter - вычисляет хэш sha224 из файла
+// HexEncoder - преобразует хэш в 16-чный формат
+// StringSink - записывает результат в строку
+    return new_hash; // возвращает хешированный результат 
 }
 int main() {
     int z;
@@ -41,7 +44,7 @@ int main() {
     } else if (q != 1) {
         cout << "Неверный ввод\n";
         return 0;
-    } else { // q == 1
+    } else { /
         string file;
         cout << "Введите имя файла:  ";
         cin >> file;
